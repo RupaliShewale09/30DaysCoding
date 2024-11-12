@@ -1,0 +1,62 @@
+21. Merge Two Sorted Lists
+Easy
+You are given the heads of two sorted linked lists list1 and list2.
+Merge the two lists into one sorted list. The list should be made by splicing together the nodes of the first two lists.
+Return the head of the merged linked list.
+
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) 
+    {
+        ListNode* temp1 = list1;   //ptr for list 1
+        ListNode* temp2 = list2;   //ptr for list 2
+
+        ListNode* newList = new ListNode();
+        ListNode* head = newList;
+        ListNode* ans = newList;
+
+        while(temp1 != NULL && temp2 != NULL)
+        {
+            if(temp1-> val < temp2-> val)
+            {
+                ListNode* newNode = new ListNode(temp1-> val);
+                head-> next = newNode;
+                head = head-> next;
+                temp1 = temp1-> next;
+            }
+            else
+            {
+                ListNode* newNode = new ListNode(temp2-> val);
+                head-> next = newNode;
+                head = head-> next;
+                temp2 = temp2-> next;
+            }
+        }
+        while(temp1 != NULL)
+        {
+            ListNode* newNode = new ListNode(temp1-> val);
+            head-> next = newNode;
+            head = head-> next;
+            temp1 = temp1-> next;
+        }
+        while(temp2 != NULL)
+        {
+            ListNode* newNode = new ListNode(temp2-> val);
+            head-> next = newNode;
+            head = head-> next;
+            temp2 = temp2-> next;
+        }
+        head = ans-> next;
+        return head;
+    }
+};
+
+
+
+Input
+list1 =
+[1,2,4]
+list2 =
+[1,3,4]
+Output
+[1,1,2,3,4,4]
